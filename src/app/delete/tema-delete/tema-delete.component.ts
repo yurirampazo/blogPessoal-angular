@@ -21,8 +21,8 @@ export class TemaDeleteComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (environment.token == '') {
-      this.router.navigate(['/entrar'])
+    if(environment.token == '') {
+      this.router.navigate(['/entrar'])   // se o valor do token for nulo, redireciona ao login
     }
 
     this.idTema = this.route.snapshot.params['id']
