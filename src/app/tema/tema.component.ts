@@ -24,7 +24,6 @@ export class TemaComponent implements OnInit {
     if(environment.token == '') {
       this.router.navigate(['/entrar'])
     }
-
     this.findAllTemas() //Lista todos os temas
 
   } //condição para redirecionar o usuario para o login quando o valor do token for nulo.
