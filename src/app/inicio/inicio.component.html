@@ -33,21 +33,7 @@
   <nav>
     <div class="nav nav-tabs d-flex justify-content-center " id="nav-tab" role="tablist">
 
-      <a class="nav-item nav-link active text-secondary font-weight-bold" id="nav-todasPostagens-tab" data-toggle="tab" href="#todasPostagens" role="tab" aria-controls="nav-todasPostagens" aria-selected="true">
-
-        <div class="card-columns">
-
-          <div class="card text-center" *ngFor='let item of listaPostagens'>
-            <div class="card-body">
-              <h5 class="card-title">{{item.titulo}}</h5>
-              <p class="card-text">{{item.texto}}</p>
-              <p class="card-text"><small class="text-muted">{{item.data}}</small></p>
-              <p class="card-text"><small class="text-muted">by: {{item.usuario.nome}}</small></p>
-            </div>
-          </div>
-
-        </div>
-
+      <a class="nav-item nav-link active text-secondary font-weight-bold" id="nav-todasPostagens-tab" data-toggle="tab" href="#todasPostagens" role="tab" aria-controls="nav-todasPostagens" aria-selected="true">Todas as postagens
       </a>
 
       <a class="nav-item nav-link text-secondary font-weight-bold" id="nav-minhasPostagens-tab" data-toggle="tab" href="#minhasPostagens" role="tab" aria-controls="nav-minhasPostagens" aria-selected="false">Minhas Postagens
@@ -60,7 +46,23 @@
   </nav>
   <div class="tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="todasPostagens" role="tabpanel" aria-labelledby="nav-todasPostagens">
-      Todas as Postagens
+
+      <div class="card-columns">
+        <div class="card text-center" *ngFor="let postagem of listaPostagens">
+          <div class="card-body">
+            <h5 class="card-title m-0">{{postagem.titulo}}</h5>
+            <p class="card-text"><small class="text-muted">
+              Tema: {{postagem.tema.descricao}}
+            </small></p>
+            <p class="card-text mt-3">{{postagem.texto}}</p>
+            <p class="card-text"><small class="text-muted">
+              Publicado por {{postagem.usuario.nome}} em {{postagem.data | date: "dd/MM/yyyy"}} às {{postagem.data | date: "HH:mm"}}
+            </small></p>
+          </div>
+        </div>
+      </div>
+
+
     </div>
     <div class="tab-pane fade" id="minhasPostagens" role="tabpanel" aria-labelledby="nav-minhasPostagens-tab">
       Minhas Postagens
@@ -98,7 +100,7 @@
           <label for="texto">Escolha um tema ou
             <a data-dismiss="modal" routerLink='/tema'>cadastre um novo</a>:
           </label>
-          <select [(ngModel)]='idTema' (change)='findByIdTema' class="form-control" name="tema" id="tema">
+          <select  class="form-control" name="tema" id="tema" [(ngModel)]='idTema' (change)='findByIdTema'>
             <option *ngFor='let item of listaTemas' value="{{item.id}}">
               {{item.descricao}}
             </option>
